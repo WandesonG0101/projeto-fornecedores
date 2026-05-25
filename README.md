@@ -75,6 +75,37 @@ SECURE_HSTS_SECONDS=31536000
 - `PATCH /api/v1/documentos/{id}/`
 - `GET /api/v1/integracoes/logs/`
 
+## Publicar no Render
+
+O repositorio ja inclui `render.yaml`, `runtime.txt`, `gunicorn` e `whitenoise`.
+
+Passos:
+
+1. Acesse `https://render.com`.
+2. Crie uma conta ou entre com GitHub.
+3. Clique em `New +` e escolha `Blueprint`.
+4. Conecte o repositorio `WandesonG0101/projeto-fornecedores`.
+5. Confirme a criacao dos recursos do arquivo `render.yaml`.
+6. Aguarde o deploy terminar.
+
+Depois do deploy, o Render mostrara uma URL parecida com:
+
+```text
+https://projeto-fornecedores.onrender.com
+```
+
+Para criar o primeiro administrador no ambiente online, abra o `Shell` do servico web no Render e rode:
+
+```bash
+python manage.py createsuperuser
+```
+
+Paginas para demonstracao:
+
+- `/admin/`
+- `/api/docs/`
+- `/health/`
+
 ## Testes e validacao
 
 ```powershell
