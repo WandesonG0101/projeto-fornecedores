@@ -50,9 +50,9 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS("Default roles and categories are ready."))
 
     def create_deploy_superuser(self):
-        username = os.environ.get("DJANGO_SUPERUSER_USERNAME")
-        email = os.environ.get("DJANGO_SUPERUSER_EMAIL", "")
-        password = os.environ.get("DJANGO_SUPERUSER_PASSWORD")
+        username = (os.environ.get("DJANGO_SUPERUSER_USERNAME") or "").strip()
+        email = (os.environ.get("DJANGO_SUPERUSER_EMAIL") or "").strip()
+        password = (os.environ.get("DJANGO_SUPERUSER_PASSWORD") or "").strip()
 
         if not username or not password:
             self.stdout.write("Deploy superuser skipped: DJANGO_SUPERUSER_USERNAME/PASSWORD not set.")
@@ -84,9 +84,8 @@ class Command(BaseCommand):
             self.stdout.write(self.style.SUCCESS(f"Deploy superuser '{username}' created."))
             return
 
-        if os.environ.get("DJANGO_SUPERUSER_RESET_PASSWORD", "False").lower() in {"1", "true", "yes"}:
-            user.set_password(password)
-            changed_fields.append("password")
+        user.set_password(password)
+        changed_fields.append("password")
 
         if changed_fields:
             user.save()
