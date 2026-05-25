@@ -94,11 +94,15 @@ Depois do deploy, o Render mostrara uma URL parecida com:
 https://projeto-fornecedores.onrender.com
 ```
 
-Para criar o primeiro administrador no ambiente online, abra o `Shell` do servico web no Render e rode:
+Como o Shell do Render pode exigir plano pago, o deploy cria um administrador automaticamente quando estas variaveis existem:
 
-```bash
-python manage.py createsuperuser
+```env
+DJANGO_SUPERUSER_USERNAME=admin
+DJANGO_SUPERUSER_EMAIL=admin@example.com
+DJANGO_SUPERUSER_PASSWORD=senha-gerada-ou-definida-no-render
 ```
+
+No blueprint, `DJANGO_SUPERUSER_PASSWORD` e gerada automaticamente pelo Render. Para ver ou trocar a senha, abra o servico no Render, entre em `Environment` e edite essa variavel. Depois faca `Manual Deploy > Clear build cache & deploy` ou redeploy normal.
 
 Paginas para demonstracao:
 
